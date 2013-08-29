@@ -1,0 +1,6 @@
+extends index
+
+block append content
+    form(action='/api/messages/create', method='post')
+        input(type='text' name='message')
+        input(type='submit')

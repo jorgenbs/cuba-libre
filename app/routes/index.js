@@ -4,5 +4,8 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('form', { title: 'Express' });
+};
+exports.presentation = function(req, res) {
+    res.render('presentation', { title: 'Presentation'});
 };

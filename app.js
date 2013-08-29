@@ -19,7 +19,7 @@ var app = express();
 app.set('env', process.env.NODE_ENV || 'development');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/app/views');
-app.set('models', __dirname + '/app/models')
+app.set('models', __dirname + '/app/models');
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -45,6 +45,8 @@ mongoose.connect(config.db);
 // config routes
 require('./config/routes')(app, routes, api);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+io.listen(server);

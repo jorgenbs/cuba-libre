@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var mongoose = require('mongoose');
+var io = require('socket.io');
 
 var Message = mongoose.model('Message');
 
@@ -13,7 +14,8 @@ module.exports.listMessages = function(req, res) {
     Message.find({}, function (err, messages) {
         res.json(messages);
     });
-}
+};
+
 module.exports.createMessage = function(req, res) {
 
     var messageString = req.body.message;
@@ -23,6 +25,7 @@ module.exports.createMessage = function(req, res) {
         if (err) console.log(err);
         else {
             res.json(message);
+            io.sockets.emit('newMessage', message);
         }
     });
-}
+};
