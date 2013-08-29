@@ -5,11 +5,13 @@
 
 var express = require('express'),
  routes = require('./app/routes'),
- user = require('./app/routes/user'),
  http = require('http'),
  path = require('path'),
  io = require('socket.io'),
- mongoose = require('mongoose');
+ mongoose = require('mongoose'),
+ message = require('./app/models/message'),
+ api = require('./app/api/api'),
+ fs = require('fs');
 
 var app = express();
 
@@ -17,6 +19,7 @@ var app = express();
 app.set('env', process.env.NODE_ENV || 'development');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/app/views');
+app.set('models', __dirname + '/app/models')
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
@@ -24,16 +27,24 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+var config = require('./config/config')[app.get('env')];
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+//db connection
+mongoose.connect(config.db);
+
+//setup models
+//fs.readdirSync(app.get('models')).forEach(function (file) {
+//    if (~file.indexOf('.js')) require(app.get('models') + '/' + file);
+//});
+
+// config routes
+require('./config/routes')(app, routes, api);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-

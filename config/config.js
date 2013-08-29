@@ -1,6 +1,6 @@
 module.exports = {
     development: {
-        db: 'mongodb://localhost/mongo',
+        db: 'mongodb://localhost:27017/cuba',
         app: {
             name: 'Cuba Libre'
         }
