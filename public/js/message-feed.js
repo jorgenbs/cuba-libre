@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 (function() {
-    var socket = io.connect('http://localhost');
-    socket.on('newMessage', function (msg) {
+    window.socket = io.connect('http://localhost');
+    window.socket.on('newMessage', function (msg) {
         $('#inbox').text(msg.message);
     });
 })();

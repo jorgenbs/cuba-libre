@@ -7,7 +7,6 @@ var express = require('express'),
  routes = require('./app/routes'),
  http = require('http'),
  path = require('path'),
- io = require('socket.io'),
  mongoose = require('mongoose'),
  message = require('./app/models/message'),
  api = require('./app/api/api'),
@@ -49,4 +48,6 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-io.listen(server);
+
+api.io = require('socket.io').listen(server);
+
