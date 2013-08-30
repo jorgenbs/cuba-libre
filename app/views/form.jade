@@ -1,9 +1,13 @@
 extends index
 
 block append content
-    form(action='/api/messages/create', method='post',id='createMessage').form-horizontal
-        div.input-append.span12
-            input(type='text' name='message',placeholder='What do you think?').input-large
-            input(type='submit').btn
+    div.container-fluid
+        div.row-fluid
+            form(action='/api/messages/create', method='post',id='createMessage')
+                div.input-group.messagebox.centering.text-center
+                    input(type='text' name='message',placeholder='What do you think?').form-control
+                    span.input-group-btn
+                        button(type='submit').btn.btn-primary
+                            i.glyphicon.glyphicon-bullhorn
     script(type='text/javascript').
         require(['message-create'])
