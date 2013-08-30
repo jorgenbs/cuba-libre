@@ -1,8 +1,9 @@
 extends index
 
 block append content
-    form(action='/api/messages/create', method='post')
-        input(type='text' name='message')
-        input(type='submit')
-    script(src='/js/lib/ajaxform.js')
-    script(src='/js/message-feed.js')
+    form(action='/api/messages/create', method='post',id='createMessage').form-horizontal
+        div.input-append.span12
+            input(type='text' name='message',placeholder='What do you think?').input-large
+            input(type='submit').btn
+    script(type='text/javascript').
+        require(['message-create'])

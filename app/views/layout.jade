@@ -6,5 +6,21 @@ html(ng-app)
     body
         block content
 
-    script(src='/js/lib/jquery.js')
-    script(src='/bootstrap/js/bootstrap.min.js')
+            script(src='/js/lib/require.js')
+            script(type='text/javascript').
+                require.config({
+                    paths: {
+                        'jQuery': '/js/lib/jquery',
+                        'socket.io': '/js/lib/socket.io',
+                        'bootstrap': '/bootstrap/js/bootstrap.min',
+                        'message-create': '/js/message-create',
+                        'message-feed': '/js/message-feed'
+                    },
+                    shims: {
+                        'bootstrap': {
+                            deps: ['jQuery']
+                        }
+                    }
+                });
+
+                require(['jQuery','bootstrap'], function(){});

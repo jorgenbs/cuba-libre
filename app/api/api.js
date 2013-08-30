@@ -7,8 +7,6 @@
  */
 var mongoose = require('mongoose');
 
-module.exports.io = undefined;
-
 var Message = mongoose.model('Message');
 
 module.exports.listMessages = function(req, res) {

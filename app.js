@@ -36,18 +36,22 @@ if ('development' == app.get('env')) {
 //db connection
 mongoose.connect(config.db);
 
-//setup models
-//fs.readdirSync(app.get('models')).forEach(function (file) {
-//    if (~file.indexOf('.js')) require(app.get('models') + '/' + file);
-//});
-
 // config routes
 require('./config/routes')(app, routes, api);
 
+//http
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-api.io = require('socket.io').listen(server);
+//web socket
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+    socket.on('newMessage', function(data){
+        console.log('GOT MESSAGE');
+        socket.broadcast.emit('newMessage', data);
+    });
+})
 

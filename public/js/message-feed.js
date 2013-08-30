@@ -5,9 +5,13 @@
  * Time: 15:47
  * To change this template use File | Settings | File Templates.
  */
-(function() {
-    window.socket = io.connect('http://localhost');
-    window.socket.on('newMessage', function (msg) {
+require(['socket.io', 'jquery'], function(io,$) {
+    var socket = io.connect('http://localhost');
+    console.log(socket);
+    socket.on('newMessage', function (msg) {
+        console.log('GOT MESSAGE');
+        console.log(msg);
         $('#inbox').text(msg.message);
     });
-})();
+});
+
