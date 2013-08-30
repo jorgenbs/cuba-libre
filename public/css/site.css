@@ -17,3 +17,26 @@ html, body{height:100%; margin:0;padding:0}
 .messagebox {
     max-width: 400px;
 }
+
+.messageText {
+    font-size: 24pt;
+    color: #000000;
+    opacity: 0;
+    position: absolute;
+    animation: fadeIn 5s;
+    -webkit-animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    80% { opacity: 0.95; font-size: 24pt }
+    100% { opacity: 0; font-size: 40pt }
+}
+
+@-webkit-keyframes fadeIn { /* Safari and Chrome */
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    80% { opacity: 0.95; font-size: 24pt }
+    100% { opacity: 0; font-size: 40pt }
+}
